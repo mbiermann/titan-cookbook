@@ -66,6 +66,12 @@ template "/etc/init.d/titan" do
   owner 'root'
   mode  0755
 end
+                                                                            
+template File.join(node["titan"]["installation_dir"], "bin/titan.sh") do
+  source "titan.sh.erb"
+  owner 'root'
+  mode  0755
+end
 
 #make sure conf dir has correct permissions
 directory "#{node.titan.conf_dir}" do

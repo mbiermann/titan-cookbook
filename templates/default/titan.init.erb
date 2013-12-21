@@ -67,9 +67,8 @@ do_start()
         --chuid $USER:$GROUP \
         --exec /bin/bash \
         --pidfile $PIDFILE \
-        -- -c "$TITAN_HOME/bin/titan.sh $TITAN_SERVER_CONF $TITAN_PROPERTIES_CONF  > /dev/null 2>&1 &"
+        -- -c "$TITAN_HOME/bin/titan.sh $PIDFILE $TITAN_SERVER_CONF $TITAN_PROPERTIES_CONF  > /dev/null 2>&1 &"
 
-    echo $$ > $PIDFILE
     is_running && return 0
 
     for tries in `seq $WAIT_FOR_START`; do
