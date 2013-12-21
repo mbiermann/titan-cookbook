@@ -4,12 +4,11 @@ Installs Titan embedded within cassandra + connects to elastic search as index b
 
 ## Tested OS Distributions
 
-Ubuntu 12.04.
-
+Ubuntu Precise 64 bit.
 
 ## Recipes
 
-Default: Install Titan embedded with cassandra and connect to existing elastic search index backend. See attributes for configuration options. 
+Default: Install Titan embedded with Cassandra.
 
 
 ## Dependencies
@@ -26,16 +25,15 @@ Cookbook dependecies managed by Berkshelf (see Berskfile)
 6. cookbook_root$ berks install
 7. cookbook_root$ vagrant up
 
-Vagrant should launch a titan node and an elastic search node for you to test out.
+Vagrant should launch titan
 
+## ToDo
 
-##TODO
-1. Fleshout documentation
-2. Add support for more titan options
-3. Add support for HBASE
+* Make Cassandra start/stop with Titan
 
 ## Copyright & License
 
-Brian Cajes, 2013
+Original by Brian Cajes, 2013
+Martin Biermann, 2013
 
 Released under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
