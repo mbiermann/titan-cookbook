@@ -1,8 +1,8 @@
 #override default cassandra recipe attributes
-normal[:cassandra] = {
+override[:cassandra] = {
   :cluster_name => "Test Cluster",
   :initial_token => "",
-  :version => '1.2.11',
+  :version => '2.0.3',
   :user => "cassandra",
   :jvm  => {
     :xms => 64,
@@ -29,15 +29,15 @@ normal[:cassandra] = {
   :concurrent_writes => 32,
   :snitch           => 'SimpleSnitch'
 }
-normal[:cassandra][:tarball] = {
-  :url => "http://www.apache.org/dist/cassandra/#{normal[:cassandra][:version]}/apache-cassandra-#{normal[:cassandra][:version]}-bin.tar.gz",
-  :md5 => "c6f80161bcc90b9f5e909e9de388957a"
+override[:cassandra][:tarball] = {
+  :url => "http://www.apache.org/dist/cassandra/#{override[:cassandra][:version]}/apache-cassandra-#{override[:cassandra][:version]}-bin.tar.gz",
+  :md5 => "98d266fa0b84b50971e87f0c905bf2df"
 }
 
 #cassandra works best with oracle jdk 6, let's override default java recipe attributes to install oracle java instead of openjdk
-normal['java']['install_flavor'] = "oracle"
-normal['java']['jdk_version'] = '6'
-normal['java']['oracle']['accept_oracle_download_terms'] = true
+override['java']['install_flavor'] = "oracle"
+override['java']['jdk_version'] = '6'
+override['java']['oracle']['accept_oracle_download_terms'] = true
 
 #titan attributes
 default[:titan] = {
