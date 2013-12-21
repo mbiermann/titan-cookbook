@@ -13,20 +13,31 @@ remote_file(tmp) do
   action :create_if_missing
 end
 
+[
+  "/usr/local/cassandra", 
+  "/usr/local/titan",
+  "/usr/local/titan/config", 
+  "/usr/local/titan/bin"
+].each  do |dir|
+  bash "chown -R #{node.titan.user}:#{node.titan.user} #{dir}" do
+    user "root"
+    code "([ -d #{dir} ] || mkdir -p #{dir}) && chown -R #{node.titan.user}:#{node.titan.user} #{dir}"
+  end
+end
+
 # 2. Extract it
 # 3. Copy to /usr/local/titan, update permissions
 package "unzip"
 bash "extract #{tmp}, move it to #{node.titan.installation_dir}" do
   user node.titan.user
   cwd  "/tmp"
-
   code <<-EOS
-    rm -rf #{node.titan.installation_dir}
     unzip -o #{tmp}
-    mkdir -p $(dirname #{node.titan.installation_dir}) 
-    mv --force #{zip_dir} #{node.titan.installation_dir}
+    rm -rf #{node.titan.installation_dir}
+    mkdir -p #{node.titan.installation_dir}
+    cp -R #{zip_dir}/* #{node.titan.installation_dir}
+    rm -rf #{zip_dir}
   EOS
-
   creates "#{node.titan.installation_dir}/bin/titan.sh"
 end
 
